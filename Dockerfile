@@ -27,7 +27,7 @@ RUN --mount=target=/mnt/build-context \
     # Settings for hugo user
     echo 'export PATH="$(yarn global bin):$PATH"' >> $HOME/.profile && \
     # Change permissions
-    chown -R $USER $WWW_DIR && \
+    chown -R $USER $WWW_DIR $HOME && \
     # Cleanup
     apk del ${REQ_BUILD} && \
     rm -rf /var/cache/apk/*
