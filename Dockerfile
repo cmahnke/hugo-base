@@ -4,7 +4,7 @@ FROM alpine:3.12
 
 LABEL maintainer="cmahnke@gmail.com"
 
-ENV REQ_RUN="git bash hugo yarn imagemagick python3 py3-pip py3-flask py3-pillow py3-click py3-jinja2 py3-magic py3-configargparse" \
+ENV REQ_RUN="git bash sudo hugo yarn imagemagick python3 py3-pip py3-flask py3-pillow py3-click py3-jinja2 py3-magic py3-configargparse" \
     BUILD_CONTEXT=/mnt/build-context \
     NPM_DEPENDENCIES="tify svgo hugo-extended" \
     USER=hugo \
@@ -22,11 +22,12 @@ RUN --mount=target=/mnt/build-context \
     # Creating directories
     mkdir -p $WWW_DIR && \
     # Setup htdocs directory
-    chown -R $USER $WWW_DIR && \
     rm -rf $HOME/docs && \
     ln -s $WWW_DIR $HOME/docs && \
     # Settings for hugo user
     echo 'export PATH="$(yarn global bin):$PATH"' >> $HOME/.profile && \
+    # Change permissions
+    chown -R $USER $WWW_DIR && \
     # Cleanup
     apk del ${REQ_BUILD} && \
     rm -rf /var/cache/apk/*
