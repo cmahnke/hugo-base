@@ -22,7 +22,7 @@ RUN --mount=target=/mnt/build-context \
     # Creating directories
     mkdir -p $WWW_DIR && \
     # Setup htdocs directory
-    chown -R $WWW_DIR && \
+    chown -R $USER $WWW_DIR && \
     rm -rf $HOME/docs && \
     ln -s $WWW_DIR $HOME/docs && \
     # Settings for hugo user
