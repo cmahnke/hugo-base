@@ -24,8 +24,13 @@ RUN --mount=target=/mnt/build-context \
     # Setup htdocs directory
     rm -rf $HOME/docs && \
     ln -s $WWW_DIR $HOME/docs && \
+    # Setup profile
+    sed -i -E 's/export PATH=\/usr\/local\/sbin:\/usr\/local\/bin:\/usr\/sbin:\/usr\/bin:\/sbin:\/bin/export PATH=\/usr\/sbin:\/usr\/bin:\/sbin:\/bin:\/usr\/local\/sbin:\/usr\/local\/bin/g'  /etc/profile && \
     # Settings for hugo user
-    echo 'export PATH="$(yarn global bin):$PATH"' >> $HOME/.profile && \
+    PATH=$( . /etc/profile ; echo $PATH ) && \
+    echo 'export PATH="$PATH:$(yarn global bin)"' >> $HOME/.profile && \
+    echo "export PATH=$PATH" >> $HOME/.bashrc && \
+    echo 'export PATH="$PATH:$(yarn global bin)"' >> $HOME/.bashrc && \
     # Change permissions
     chown -R $USER $WWW_DIR $HOME && \
     # Cleanup
