@@ -6,7 +6,7 @@ LABEL maintainer="cmahnke@gmail.com"
 
 ENV REQ_RUN="git bash sudo hugo yarn imagemagick python3 py3-pip py3-flask py3-pillow py3-click py3-jinja2 py3-magic py3-configargparse" \
     BUILD_CONTEXT=/mnt/build-context \
-    NPM_DEPENDENCIES="tify svgo hugo-extended" \
+    NPM_DEPENDENCIES="svgo hugo-extended leaflet leaflet-iiif leaflet.fullscreen" \
     USER=hugo \
     HOME=/hugo \
     WWW_DIR=/var/www/html
